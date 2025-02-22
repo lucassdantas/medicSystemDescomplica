@@ -1,8 +1,12 @@
-import {Appointment} from '../models'
+import Appointment from '../models/Appointment.js'
 
 
 const getAllAppointments = async () => {
-  return await Appointment.find();
+  try {
+    return await Appointment.find();
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 
@@ -18,7 +22,7 @@ const getAppointment = async (id) => {
 const saveAppointment = async ({date, doctorId, pacientId}) => {
   try{
     const prescription = new Appointment({date, doctorId, pacientId})
-    return await prescription
+    return await prescription.save()
   } catch(error){
     throw new Error(error)
   }
@@ -34,7 +38,7 @@ const updateAppointment = async (id, {date, doctorId, pacientId }) => {
 
 const deleteAppointment = async(id) => {
   try {
-    return await Appointment.findByIdAndUpdate(id)
+    return await Appointment.findByIdAndDelete(id)
   } catch (error) {
     throw new Error(error)
   }

@@ -1,5 +1,5 @@
-import {express} from 'express'
-import AppointmentService from '../services/AppointmentService'
+import express from 'express'
+import AppointmentService from '../services/AppointmentService.js'
 let router = express.Router()
 
 
@@ -56,4 +56,4 @@ router.delete('/appointments/:id', async(req, res) => {
   }
 })
 
-export default router()
+export default router
