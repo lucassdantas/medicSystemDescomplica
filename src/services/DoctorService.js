@@ -8,6 +8,7 @@ const getDoctor = async (id) => {
   return await doctorRepository.getDoctor(id)
 }
 const saveDoctor = async({ name, login, password, medicalSpeciality, medicalRegistration, email, phone}) => {
+  console.log(password)
   return await doctorRepository.saveDoctor({name, login, password, medicalSpeciality, medicalRegistration, email, phone})
 }
 const updateDoctor = async(id, {name, login, password, medicalSpeciality, medicalRegistration, email, phone}) => {

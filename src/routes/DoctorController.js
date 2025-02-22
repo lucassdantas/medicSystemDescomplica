@@ -28,7 +28,7 @@ router.post('/postDoctor', async(req, res) => {
   const { name, login, password, medicalSpeciality, medicalRegistration, email, phone} = req.body
   const hashedPassword = await bcrypt.hash(password, 10)
   try {
-    const doctor = await DoctorService.saveDoctor({ name, login, hashedPassword, medicalSpeciality, medicalRegistration, email, phone});
+    const doctor = await DoctorService.saveDoctor({ name, login, password:hashedPassword, medicalSpeciality, medicalRegistration, email, phone});
     res.send(doctor)
   } catch (error) {
     console.log(error)
