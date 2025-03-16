@@ -4,7 +4,7 @@ const verifyToken = (req, res, next) =>{
   const token = req.header('Authorization')
   if(!token) return res.status(401).json({error:"Access denied!"})
   try {
-   const decoded = jwt.verify(token, 'you-secret-key')
+   const decoded = jwt.verify(token, 'you-secret-key') //in real example, the secret key will be hidden on this repository
    req.doctorId = decoded.doctorId
    next()
   } catch (error) {

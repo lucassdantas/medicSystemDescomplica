@@ -24,7 +24,7 @@ router.post('/login', async(req, res) => {
     if(!doctor) return res.status(401).json({error:'authentication failed'})
     const passwordMatch = await bcrypt.compare(password, doctor.password)
     if(!passwordMatch) return res.status(401).json({error:'senha inválida'})
-    const token = jwt.sign({doctorId:doctor._id}, 'you-secret-key', {expiresIn:'1h'})
+    const token = jwt.sign({doctorId:doctor._id}, 'you-secret-key', {expiresIn:'1h'}) //in real example, the secret key will be hidden on this repository
     res.status(200).json({token})
   } catch (error) {
     console.log(error)
