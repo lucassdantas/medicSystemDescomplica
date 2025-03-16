@@ -24,9 +24,9 @@ const savePrescription = async ({date, appointmentId, medicine, dosage, instruct
     throw new Error(error)
   }
 }
-const updatePrescription = async (id, {date, appointmentId, medicine, dosage, instructions}) => {
+const updatePrescription = async (id, {date, appointmentId, medicine, dosage, instructions, file}) => {
   try {
-    return await Prescription.findByIdAndUpdate(id, {date, appointmentId, medicine, dosage, instructions})
+    return await Prescription.findByIdAndUpdate(id, {date, appointmentId, medicine, dosage, instructions, file}, {new:true})
   } catch (error) {
     throw new Error(error)
   }

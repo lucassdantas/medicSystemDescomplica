@@ -5,7 +5,6 @@ const Schema = mongoose.Schema
 const prescriptionsSchema = new Schema({
   date: {
     type: Date,
-    required:[true, 'Date of prescription is required']
   },
   appointmentId:{
     type: String,
@@ -25,6 +24,9 @@ const prescriptionsSchema = new Schema({
   createdAt: {
     type: Date, 
     default: Date.now
+  },
+  file: {
+    type:String
   }
 })
 
