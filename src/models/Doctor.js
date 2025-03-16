@@ -35,7 +35,13 @@ const doctorsSchema = new Schema({
 
   phone:{
     type:String,
-    required:[true, 'phone is required']
+    required:[true, 'phone is required'],
+    validate:{
+      validator:function(v) {
+        return /\d{2} 9\d{4}-\d{4}/.test(v)
+      },
+      message: props => `${props.value}`
+    }
     
   },
   createdAt: {

@@ -1,8 +1,12 @@
 import express from 'express'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import appointmentController from './AppointmentController.js' 
 import doctorController from './DoctorController.js' 
 import pacientController from './PacientController.js' 
 import prescriptionController from './PrescriptionController.js' 
+import doctorRepository from '../repositories/DoctorRepository.js'
+import verifyToken from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
@@ -13,9 +17,24 @@ router.get(
   }
 )
 
-router.use('/', appointmentController)
-router.use('/', doctorController)
-router.use('/', pacientController)
-router.use('/', prescriptionController)
+router.post('/login', async(req, res) => {
+  try {
+    const {login, password} = req.body
+    const doctor = await doctorRepository.getDoctorByLogin(login)
+    if(!doctor) return res.status(401).json({error:'authentication failed'})
+    const passwordMatch = await bcrypt.compare(password, doctor.password)
+    if(!passwordMatch) return res.status(401).json({error:'senha inválida'})
+    const token = jwt.sign({doctorId:doctor._id}, 'you-secret-key', {expiresIn:'1h'})
+    res.status(200).json({token})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({error:'login failed'}) 
+  }
+})
+
+router.use('/',  appointmentController)
+router.use('/',  doctorController)
+router.use('/',  pacientController)
+router.use('/',  prescriptionController)
 
 export default router;

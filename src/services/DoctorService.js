@@ -17,12 +17,15 @@ const updateDoctor = async(id, {name, login, password, medicalSpeciality, medica
 const  deleteDoctor = async(id) => {
   return await doctorRepository.deleteDoctor(id)
 }
-
+const getDoctorByLogin = async(login) => {
+ return await doctorRepository.getDoctorByLogin(login)
+}
 const doctorService = {
   getAllDoctors,
   getDoctor,
   saveDoctor,
   updateDoctor,
-  deleteDoctor
+  deleteDoctor,
+  getDoctorByLogin
 }
 export default doctorService

@@ -9,11 +9,25 @@ const appointmentsSchema = new Schema({
   },
   doctorId: {
     type: String, 
-    required: [true, 'doctorId is required']
+    required: [true, 'doctorId is required'],
+    validate:{
+      validator:(v) => {
+        const id = new mongoose.Types.ObjectId(v)
+        return Doctor.exists({_id:id})
+      },
+      message:props => `Doctor id ${props.value} not found.`
+    }
   },
   pacientId: {
     type: String, 
-    required: [true, 'pacientId is required']
+    required: [true, 'pacientId is required'],
+    validate:{
+      validator:(v) => {
+        const id = new mongoose.Types.ObjectId(v)
+        return Pacient.exists({_id:id})
+      },
+      message:props => `Pacient id ${props.value} not found.`
+    }
   },
   createdAt: {
     type: Date, 
