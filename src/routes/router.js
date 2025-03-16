@@ -32,9 +32,9 @@ router.post('/login', async(req, res) => {
   }
 })
 
-router.use('/',  appointmentController)
-router.use('/',  doctorController)
-router.use('/',  pacientController)
-router.use('/',  prescriptionController)
+router.use('/', verifyToken, appointmentController)
+router.use('/', verifyToken, doctorController)
+router.use('/', verifyToken, pacientController)
+router.use('/', verifyToken, prescriptionController)
 
 export default router;

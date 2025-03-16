@@ -20,7 +20,7 @@ const pacientSchema = new Schema({
     required: [true, 'phone is required'],
     validate:{
       validator:(v) => {
-        return /\d{2} 9\d{4}-\d{9}/.test(v)
+        return /\d{2} 9\d{4}-\d{4}/.test(v)
       },
       message: props => `${props.value}`
     }
