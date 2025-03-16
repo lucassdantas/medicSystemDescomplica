@@ -1,15 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/')
+mongoose.connect('mongodb://localhost:27017/medi-app');
 
-const db = mongoose.connection 
+const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error: '))
+db.on('error', console.error.bind(console, 'connection error: '));
 
 db.once(
-  'open', () => {
-    console.log('db connected succesfully')
-  }
-)
+    'open', function(){
+        console.log('Database connected successfully!');
+    }
+);
 
 export default db;
